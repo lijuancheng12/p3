@@ -1,0 +1,21 @@
+@import "_variables.scss";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body{
+      background-color: $dark;
+      line-height: 1.6;
+      overscroll-behavior: none;
+      overflow-x: hidden;
+      max-width: 100%;
+      
+  }
+
+  html {
+      scroll-behavior: smooth;
+  }
+
+  
