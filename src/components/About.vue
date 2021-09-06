@@ -117,6 +117,8 @@ export default {
   #container {
     #about {
       width: 100vw;
+      height: auto;
+      padding-bottom: 50px;
       flex-direction: column;
       .part2 {
       flex-direction: column;

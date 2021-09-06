@@ -4,14 +4,19 @@
     <h3>Email: lijuancheng12@gmail.com</h3>
 
     <div>
-      <a href="https://github.com/jenseneducation-lijuan-cheng">
+      <a href="https://github.com/lijuancheng12">
         <img src="@/assets/github.png" class="social" />
       </a>
       <a href="https://www.linkedin.com/in/lijuan-cheng-39ba77191/">
         <img src="@/assets/linkedin.png" class="social" />
       </a>
     </div>
-    <VueElevator :word="word" :duration="duration" :mainAudio="mainAudio" :endAudio="endAudio"></VueElevator>
+    <VueElevator
+      :word="word"
+      :duration="duration"
+      :mainAudio="mainAudio"
+      :endAudio="endAudio"
+    ></VueElevator>
   </div>
 </template>
 
@@ -25,9 +30,9 @@ export default {
       word: "Go to Top",
       duration: 45000,
       mainAudio: music,
-      endAudio: "http://tholman.com/elevator.js/music/ding.mp3"
+      endAudio: "http://tholman.com/elevator.js/music/ding.mp3",
     };
-  }
+  },
 };
 </script>
 
@@ -43,8 +48,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  h2{
-    margin-top:20px;
+  h2 {
+    margin-top: 20px;
   }
   .social {
     width: 30px;
@@ -63,11 +68,9 @@ export default {
   font-weight: bold;
 }
 @media screen and (max-width: 500px) {
-    #contact{
-        width:100vw;
-        font-size: 1rem;
-
-  
-    }
+  #contact {
+    width: 100vw;
+    font-size: 1rem;
+  }
 }
 </style>

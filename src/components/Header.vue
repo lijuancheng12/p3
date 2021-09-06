@@ -35,6 +35,7 @@ export default {};
   ul {
     display: flex;
     list-style: none;
+    align-items: center;
     width: 100%;
     justify-content: center;
     li {
