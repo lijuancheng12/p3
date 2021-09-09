@@ -2,14 +2,14 @@
   <div id="home">
     <Header />
     <h1 id="topp">Lijuan Cheng</h1>
-    <h5>Front end developer</h5>
+    <h5>Front end developer <span>/ </span>Full stack developer</h5>
     <Skill />
     <a href="#portfolio" id="to-portfolio">
       <DownArrow />
     </a>
     <Portfolio />
     <About />
-    
+
     <Contact />
   </div>
 </template>
@@ -29,15 +29,15 @@ export default {
     Header,
     Portfolio,
     Skill,
-    DownArrow
-  }
+    DownArrow,
+  },
 };
 </script>
 <style  lang ="scss" scoped>
 @import "../assets/scss/main.scss";
 
 #home {
-  width:100vw;
+  width: 100vw;
   /*height: 100vh;*/
   display: flex;
   flex-direction: column;
@@ -55,20 +55,24 @@ export default {
     color: white;
     font-size: 1rem;
     letter-spacing: 0.5rem;
+    span {
+      color: darkgoldenrod;
+    }
   }
   #to-portfolio {
-margin-top: 300px;  }
+    margin-top: 300px;
+  }
 }
 @media screen and (max-width: 500px) {
-    #home{
-        width: 100vw;
-        h1{
-          margin-top: 200px;
-          font-size: 2rem;
-        }
-        h5{
-          margin-top:10px;
-        }
+  #home {
+    width: 100vw;
+    h1 {
+      margin-top: 200px;
+      font-size: 2rem;
     }
+    h5 {
+      margin-top: 10px;
+    }
+  }
 }
 </style>
