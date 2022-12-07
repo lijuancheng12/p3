@@ -29,7 +29,6 @@ export default {
 
 #home {
   background: #ffffff;
-  height: 100vh;
   padding: 20px;
   .title {
     color: #1c1b1b;
