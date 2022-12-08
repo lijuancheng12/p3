@@ -1,9 +1,19 @@
 <template>
   <div id="home">
     <h2 class="title">Sverige Radio P3:s tablå</h2>
-    <button v-for="(day, idx) in week" :key="idx" @click="selectedIdx = idx">{{ buttonTitle(idx) }}</button>
-    
-    <ProgramTable :programs='apiData.schedule'/>
+    <div class="show-date-programs">
+      <div class="show-date">Visar:</div>
+      <button
+        v-for="(day, idx) in week"
+        :key="idx"
+        class="date-buttons"
+        @click="selectedIdx = idx"
+      >
+        {{ buttonTitle(idx) }}
+      </button>
+    </div>
+
+    <ProgramTable :programs="apiData.schedule" />
   </div>
 </template>
 
@@ -12,15 +22,15 @@ import axios from 'axios';
 export default {
   name: 'Home',
   components: {
-    ProgramTable:() => import('@/components/ProgramTable.vue')
+    ProgramTable: () => import('@/components/ProgramTable.vue')
   },
-  data:() =>({ 
+  data: () => ({
     apiData: {},
     selectedIdx: 0
   }),
   computed: {
     week() {
-      let days = []
+      let days = [];
       const today = new Date();
       days.push(today);
       for (let i = 1; i < 7; i++) {
@@ -29,35 +39,38 @@ export default {
         days.push(d);
       }
       return days;
-    },
-    
+    }
   },
   methods: {
     buttonTitle(idx) {
-      console.log(idx);
       if (idx === 0) {
         return 'Idag';
       } else if (idx == 1) {
-        return 'Imorgon'
+        return 'Imorgon';
       }
       const day = this.week[idx];
-      return `${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`;
+      return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
     }
   },
   watch: {
     async selectedIdx(idx) {
       const day = this.week[idx];
-      const date = `${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`
-      const res = await axios.get("https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100&date="+date);
+      const date = `${day.getFullYear()}-${day.getMonth() +
+        1}-${day.getDate()}`;
+      const res = await axios.get(
+        'https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100&date=' +
+          date
+      );
       this.apiData = res.data;
     }
   },
   async created() {
-    const res = await axios.get("https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100");
+    const res = await axios.get(
+      'https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100'
+    );
     this.apiData = res.data;
   }
 };
-
 </script>
 <style lang="scss" scoped>
 @import '../assets/scss/main.scss';
@@ -70,6 +83,27 @@ export default {
     color: #1c1b1b;
     font-family: Poppins;
     font-size: 30px;
+  }
+  .show-date-programs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 0px 50px 0px;
+    font-family: Poppins;
+    .date-buttons {
+      color: #1c1b1b;
+      border:none;
+      border-radius: 15px;
+      margin: 15px;
+      padding: 5px;
+      font-size: 14px;
+      font-family: sans-serif;
+      cursor: pointer; 
+    }
+     .date-buttons:hover {
+        background: $green;
+        color:#ffffff;
+      }
   }
 }
 </style>

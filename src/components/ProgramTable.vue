@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="show-date">Visar:</div>
     <div
       v-for="(program, idx) in programs"
       :key="idx"
@@ -10,7 +9,7 @@
       <img :src="program.imageurl" class="program-image" />
       <div>
         <div class="program-text">
-        {{ program.title }}
+          {{ program.title }}
         </div>
         <div class="show-more-info show-info" @click="toggleShow(idx)">
           Visa mer +
@@ -49,7 +48,13 @@ export default {
       const time = new Date(parseInt(str.substring(start + 1, end)));
       const hours = time.getHours();
       const minutes = time.getMinutes();
-      return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+      return (
+        (hours < 10 ? '0' : '') +
+        hours +
+        ':' +
+        (minutes < 10 ? '0' : '') +
+        minutes
+      );
     }
   }
 };
@@ -57,14 +62,14 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/main.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-.show-date{
-  margin:20px 0px 50px 0px;
+.show-date {
+  margin: 20px 0px 50px 0px;
   font-family: Poppins;
 }
 .program-container {
   display: flex;
   flex-direction: row;
-  padding: 12px;
+  padding: 12px 0px 12px 45px;
   .program-text {
     font-size: 16px;
     font-family: Poppins;
@@ -76,8 +81,8 @@ export default {
     font-size: 14px;
   }
   .show-info {
-    color:$pink;
-    border:none;
+    color: $pink;
+    border: none;
     width: 100px;
   }
   .program-image {
@@ -87,8 +92,8 @@ export default {
     margin: 0px 10px;
   }
 }
-.table-border{
-  border-bottom:1px solid #CCCCCC;
+.table-border {
+  border-bottom: 1px solid #cccccc;
   margin: 1px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
