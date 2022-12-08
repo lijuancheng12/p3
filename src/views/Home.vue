@@ -1,6 +1,8 @@
 <template>
   <div id="home">
     <h2 class="title">Sverige Radio P3:s tablå</h2>
+    <button v-for="(day, idx) in week" :key="idx" @click="selectedIdx = idx">{{ buttonTitle(idx) }}</button>
+    
     <ProgramTable :programs='apiData.schedule'/>
   </div>
 </template>
@@ -13,11 +15,45 @@ export default {
     ProgramTable:() => import('@/components/ProgramTable.vue')
   },
   data:() =>({ 
-    apiData: {}
-
+    apiData: {},
+    selectedIdx: 0
   }),
+  computed: {
+    week() {
+      let days = []
+      const today = new Date();
+      days.push(today);
+      for (let i = 1; i < 7; i++) {
+        let d = new Date();
+        d.setDate(today.getDate() + i);
+        days.push(d);
+      }
+      return days;
+    },
+    
+  },
+  methods: {
+    buttonTitle(idx) {
+      console.log(idx);
+      if (idx === 0) {
+        return 'Idag';
+      } else if (idx == 1) {
+        return 'Imorgon'
+      }
+      const day = this.week[idx];
+      return `${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`;
+    }
+  },
+  watch: {
+    async selectedIdx(idx) {
+      const day = this.week[idx];
+      const date = `${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`
+      const res = await axios.get("https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100&date="+date);
+      this.apiData = res.data;
+    }
+  },
   async created() {
-    const res = await axios.get("https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json");
+    const res = await axios.get("https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100");
     this.apiData = res.data;
   }
 };
