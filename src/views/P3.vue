@@ -7,6 +7,7 @@
         v-for="(day, idx) in week"
         :key="idx"
         class="date-buttons"
+        :class="{ selected: idx === selectedIdx }"
         @click="selectedIdx = idx"
       >
         {{ buttonTitle(idx) }}
@@ -20,7 +21,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'Home',
+  name: 'P3',
   components: {
     ProgramTable: () => import('@/components/ProgramTable.vue')
   },
@@ -42,6 +43,9 @@ export default {
     }
   },
   methods: {
+    addZero(x) {
+      return (x < 10 ? '0' : '') + x;
+    },
     buttonTitle(idx) {
       if (idx === 0) {
         return 'Idag';
@@ -49,14 +53,14 @@ export default {
         return 'Imorgon';
       }
       const day = this.week[idx];
-      return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
+      //get year, Month and date
+      return `${day.getFullYear()}-${this.addZero(day.getMonth() + 1)}-${this.addZero(day.getDate())}`;
     }
   },
   watch: {
     async selectedIdx(idx) {
       const day = this.week[idx];
-      const date = `${day.getFullYear()}-${day.getMonth() +
-        1}-${day.getDate()}`;
+      const date = `${day.getFullYear()}-${this.addZero(day.getMonth() + 1)}-${this.addZero(day.getDate())}`
       const res = await axios.get(
         'https://api.sr.se/api/v2/scheduledepisodes?channelid=164&format=json&size=100&date=' +
           date
@@ -91,19 +95,24 @@ export default {
     margin: 20px 0px 50px 0px;
     font-family: Poppins;
     .date-buttons {
+      width: 90px;
       color: #1c1b1b;
-      border:none;
+      border: none;
       border-radius: 15px;
       margin: 15px;
       padding: 5px;
       font-size: 14px;
       font-family: sans-serif;
-      cursor: pointer; 
+      cursor: pointer;
     }
-     .date-buttons:hover {
-        background: $green;
-        color:#ffffff;
-      }
+    .selected {
+      background-color: $green;
+      color: white;
+    }
+    .date-buttons:hover {
+      background: $green;
+      color: #ffffff;
+    }
   }
 }
 </style>

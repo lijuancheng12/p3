@@ -45,6 +45,7 @@ export default {
     getDate(str) {
       const start = str.indexOf('(');
       const end = str.indexOf(')');
+      // find the number in ther date string then parse it. 
       const time = new Date(parseInt(str.substring(start + 1, end)));
       const hours = time.getHours();
       const minutes = time.getMinutes();

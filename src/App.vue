@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <router-view/>
+    <P3/>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'App',
+  components: {
+    P3: () => import('@/views/P3.vue')
+  },
 }
 </script>
 
 <style lang="scss">
-@import "assets/scss/main.scss";
-
-@media screen and (max-width: 500px) {
-#app {
-  max-width: 400px;
-}
-    
-}
 </style>
